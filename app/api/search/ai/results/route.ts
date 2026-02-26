@@ -147,10 +147,10 @@ export async function POST(request: Request) {
       ranked = candidateCompanies.map((_, i) => ({ index: i, reason: "Relevant vendor" }));
     }
 
-    const results: CompanySearchResult[] = ranked.map(({ index, reason }) => {
+    const results: CompanySearchResult[] = ranked.flatMap(({ index, reason }) => {
       const c = candidateCompanies[index];
-      if (!c) return null;
-      return {
+      if (!c) return [];
+      return [{
         id: c.id,
         name: c.name,
         slug: c.slug,
@@ -158,8 +158,8 @@ export async function POST(request: Request) {
         category: c.category,
         subcategory: c.subcategory,
         matchReason: reason,
-      };
-    }).filter((r): r is CompanySearchResult => r != null);
+      }];
+    });
 
     const response: AISearchResultsResponse = { assistantSummary, results };
     return NextResponse.json(response);

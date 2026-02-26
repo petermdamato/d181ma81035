@@ -18,19 +18,38 @@ export interface Database {
           created_at: string;
           updated_at: string;
         };
-        Insert: Omit<Database["public"]["Tables"]["profiles"]["Row"], "created_at" | "updated_at"> & {
+        Insert: {
+          id: string;
+          full_name?: string | null;
+          display_name?: string | null;
+          industry?: string | null;
           created_at?: string;
           updated_at?: string;
         };
-        Update: Partial<Database["public"]["Tables"]["profiles"]["Insert"]>;
+        Update: {
+          id?: string;
+          full_name?: string | null;
+          display_name?: string | null;
+          industry?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
       };
       data_delivery_methods: {
         Row: {
           id: string;
           name: string;
         };
-        Insert: Omit<Database["public"]["Tables"]["data_delivery_methods"]["Row"], "id"> & { id?: string };
-        Update: Partial<Database["public"]["Tables"]["data_delivery_methods"]["Insert"]>;
+        Insert: {
+          id?: string;
+          name: string;
+        };
+        Update: {
+          id?: string;
+          name?: string;
+        };
+        Relationships: [];
       };
       data_attributes: {
         Row: {
@@ -38,8 +57,17 @@ export interface Database {
           name: string;
           public: boolean;
         };
-        Insert: Omit<Database["public"]["Tables"]["data_attributes"]["Row"], "id"> & { id?: string };
-        Update: Partial<Database["public"]["Tables"]["data_attributes"]["Insert"]>;
+        Insert: {
+          id?: string;
+          name: string;
+          public?: boolean;
+        };
+        Update: {
+          id?: string;
+          name?: string;
+          public?: boolean;
+        };
+        Relationships: [];
       };
       companies: {
         Row: {
@@ -59,15 +87,49 @@ export interface Database {
           created_at: string;
           updated_at: string;
         };
-        Insert: Omit<Database["public"]["Tables"]["companies"]["Row"], "id" | "created_at" | "updated_at" | "slug" | "delivery_method_ids" | "data_attribute_ids"> & {
+        Insert: {
           id?: string;
-          slug?: string; // optional: generated from name + category + subcategory if omitted
+          name: string;
+          slug?: string;
+          description?: string | null;
+          logo_url?: string | null;
+          website_url?: string | null;
+          category?: string | null;
+          subcategory?: string | null;
           delivery_method_ids?: string[];
           data_attribute_ids?: string[];
+          claimed?: boolean;
+          claimed_contact?: string | null;
+          claimed_by_user_id?: string | null;
           created_at?: string;
           updated_at?: string;
         };
-        Update: Partial<Database["public"]["Tables"]["companies"]["Insert"]>;
+        Update: {
+          id?: string;
+          name?: string;
+          slug?: string;
+          description?: string | null;
+          logo_url?: string | null;
+          website_url?: string | null;
+          category?: string | null;
+          subcategory?: string | null;
+          delivery_method_ids?: string[];
+          data_attribute_ids?: string[];
+          claimed?: boolean;
+          claimed_contact?: string | null;
+          claimed_by_user_id?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "companies_claimed_by_user_id_fkey";
+            columns: ["claimed_by_user_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
       };
       company_claim_tokens: {
         Row: {
@@ -78,11 +140,31 @@ export interface Database {
           expires_at: string;
           created_at: string;
         };
-        Insert: Omit<Database["public"]["Tables"]["company_claim_tokens"]["Row"], "id" | "created_at"> & {
+        Insert: {
           id?: string;
+          company_id: string;
+          email: string;
+          token: string;
+          expires_at: string;
           created_at?: string;
         };
-        Update: Partial<Database["public"]["Tables"]["company_claim_tokens"]["Insert"]>;
+        Update: {
+          id?: string;
+          company_id?: string;
+          email?: string;
+          token?: string;
+          expires_at?: string;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "company_claim_tokens_company_id_fkey";
+            columns: ["company_id"];
+            isOneToOne: false;
+            referencedRelation: "companies";
+            referencedColumns: ["id"];
+          },
+        ];
       };
       ai_search_sessions: {
         Row: {
@@ -98,11 +180,33 @@ export interface Database {
           other_details: string | null;
           raw_messages: unknown;
         };
-        Insert: Omit<Database["public"]["Tables"]["ai_search_sessions"]["Row"], "id" | "created_at"> & {
+        Insert: {
           id?: string;
           created_at?: string;
+          topic?: string | null;
+          subject_population?: string | null;
+          years_dates?: string | null;
+          ownership?: string | null;
+          data_type?: string | null;
+          data_use?: string | null;
+          geography?: string | null;
+          other_details?: string | null;
+          raw_messages?: unknown;
         };
-        Update: Partial<Database["public"]["Tables"]["ai_search_sessions"]["Insert"]>;
+        Update: {
+          id?: string;
+          created_at?: string;
+          topic?: string | null;
+          subject_population?: string | null;
+          years_dates?: string | null;
+          ownership?: string | null;
+          data_type?: string | null;
+          data_use?: string | null;
+          geography?: string | null;
+          other_details?: string | null;
+          raw_messages?: unknown;
+        };
+        Relationships: [];
       };
       reviews: {
         Row: {
@@ -121,14 +225,93 @@ export interface Database {
           created_at: string;
           updated_at: string;
         };
-        Insert: Omit<Database["public"]["Tables"]["reviews"]["Row"], "id" | "created_at" | "updated_at"> & {
+        Insert: {
           id?: string;
+          company_id: string;
+          user_id: string;
+          rating?: number | null;
+          title: string;
+          body?: string | null;
+          ease_of_access_rating?: number | null;
+          sales_team_rating?: number | null;
+          data_coverage_rating?: number | null;
+          value_rating?: number | null;
+          found_when?: string | null;
+          result?: string | null;
           created_at?: string;
           updated_at?: string;
         };
-        Update: Partial<Database["public"]["Tables"]["reviews"]["Insert"]>;
+        Update: {
+          id?: string;
+          company_id?: string;
+          user_id?: string;
+          rating?: number | null;
+          title?: string;
+          body?: string | null;
+          ease_of_access_rating?: number | null;
+          sales_team_rating?: number | null;
+          data_coverage_rating?: number | null;
+          value_rating?: number | null;
+          found_when?: string | null;
+          result?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "reviews_company_id_fkey";
+            columns: ["company_id"];
+            isOneToOne: false;
+            referencedRelation: "companies";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "reviews_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      user_bookmarks: {
+        Row: {
+          user_id: string;
+          company_id: string;
+          created_at: string;
+        };
+        Insert: {
+          user_id: string;
+          company_id: string;
+          created_at?: string;
+        };
+        Update: {
+          user_id?: string;
+          company_id?: string;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "user_bookmarks_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "user_bookmarks_company_id_fkey";
+            columns: ["company_id"];
+            isOneToOne: false;
+            referencedRelation: "companies";
+            referencedColumns: ["id"];
+          },
+        ];
       };
     };
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
+    Enums: Record<string, never>;
+    CompositeTypes: Record<string, never>;
   };
 }
 

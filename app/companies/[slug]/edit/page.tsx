@@ -23,8 +23,8 @@ export default async function CompanyEditPage({ params }: Props) {
     !company.claimed || (company.claimed_by_user_id != null && company.claimed_by_user_id === user.id);
   if (!canEdit) notFound();
 
-  const deliveryMethodIds = company.delivery_method_ids ?? [];
-  const dataAttributeIds = company.data_attribute_ids ?? [];
+  const deliveryMethodIds: string[] = company.delivery_method_ids ?? [];
+  const dataAttributeIds: string[] = company.data_attribute_ids ?? [];
 
   const [deliveryMethodsRes, allAttributesRes] = await Promise.all([
     supabase.from("data_delivery_methods").select("id, name").order("name"),
@@ -33,12 +33,13 @@ export default async function CompanyEditPage({ params }: Props) {
       : Promise.resolve({ data: [] as { id: string; name: string }[] }),
   ]);
 
+  type AttrRow = { id: string; name: string };
   const allDeliveryMethods = deliveryMethodsRes.data ?? [];
-  const initialAttributeRows = allAttributesRes.data ?? [];
-  const initialAttributes = dataAttributeIds
-    .map((id) => initialAttributeRows.find((r) => r.id === id))
-    .filter((r): r is { id: string; name: string } => r != null)
-    .map((r) => ({ id: r.id, name: r.name }));
+  const initialAttributeRows: AttrRow[] = (allAttributesRes.data as AttrRow[] | null) ?? [];
+  const attrById = new Map(initialAttributeRows.map((r) => [r.id, r]));
+  const initialAttributes: AttrRow[] = dataAttributeIds
+    .map((id: string) => attrById.get(id))
+    .filter((r): r is AttrRow => r != null);
 
   const { data: publicAttributes } = await supabase
     .from("data_attributes")

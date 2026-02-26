@@ -30,10 +30,11 @@ export default async function DashboardPage() {
       .order("created_at", { ascending: false }),
   ]);
 
-  const bookmarkedCompanies =
+  type BookmarkCompany = { id: string; name: string; slug: string; logo_url: string | null };
+  const bookmarkedCompanies: BookmarkCompany[] =
     bookmarksResult.data
-      ?.map((b) => (b as { companies: { id: string; name: string; slug: string; logo_url: string | null } | null }).companies)
-      .filter((c): c is { id: string; name: string; slug: string; logo_url: string | null } => c != null) ?? [];
+      ?.map((b) => (b as unknown as { companies: BookmarkCompany | null }).companies)
+      .filter((c): c is BookmarkCompany => c != null) ?? [];
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
