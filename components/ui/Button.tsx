@@ -13,7 +13,7 @@ const variants = {
   accent:
     "bg-[#B4442C] text-white hover:bg-[#6D1C07] border border-[#6D1C07]",
   outline:
-    "border-2 border-[#546B4C] text-[#071205] bg-transparent hover:bg-[#546B4C]/10",
+    "border border-[#546B4C] text-[#071205] bg-transparent hover:bg-[#546B4C]/10",
   ghost:
     "text-[#071205] hover:bg-[#ACAEA1]/30",
 };

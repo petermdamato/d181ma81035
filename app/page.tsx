@@ -32,17 +32,17 @@ export default async function Home() {
             <span className="text-[#ACAEA1]">data vendor</span> reviews
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-[#ACAEA1]">
-            Discover and compare data providers. Read real reviews from people who use them—and add your own.
+            Discover and compare data providers. Read real reviews from people
+            who use them—and add your own.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
-            <Link href="/search/ai">
+            <Link href="/reviews">
               <Button
-                variant="primary"
+                variant="outline"
                 size="lg"
-                className="gap-2 bg-[#456926] hover:bg-[#233620]"
+                className="border-[#ACAEA1] text-[#ACAEA1] hover:bg-[#ACAEA1]/10"
               >
-                <SparkleIcon className="h-5 w-5" />
-                Search vendors with AI
+                See reviews
               </Button>
             </Link>
             <Link href="/companies">
@@ -54,9 +54,16 @@ export default async function Home() {
                 Browse vendors
               </Button>
             </Link>
-            <Link href="/reviews">
-              <Button variant="outline" size="lg" className="border-[#ACAEA1] text-[#ACAEA1] hover:bg-[#ACAEA1]/10">
-                See reviews
+            <Link href="/search/ai">
+              <Button
+                variant="primary"
+                size="lg"
+                className="gap-2 bg-[#456926] hover:bg-[#233620]"
+              >
+                <div style={{ gap: "8px", display: "flex" }}>
+                  Search vendors with AI
+                  <SparkleIcon className="h-5 w-5" />
+                </div>
               </Button>
             </Link>
           </div>
