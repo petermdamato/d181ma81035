@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dataist – Data vendor reviews",
+  title: "Source Signal – Data vendor reviews",
   description: "Find and review data vendors. The directory for data provider reviews.",
 };
 

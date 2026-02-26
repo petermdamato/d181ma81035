@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { SparkleIcon } from "@/components/icons/SparkleIcon";
 import { Button } from "@/components/ui";
 import { ReviewsCarousel } from "@/components/ReviewsCarousel";
 import { NewVendorsRibbon } from "@/components/NewVendorsRibbon";
@@ -34,6 +35,16 @@ export default async function Home() {
             Discover and compare data providers. Read real reviews from people who use them—and add your own.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
+            <Link href="/search/ai">
+              <Button
+                variant="primary"
+                size="lg"
+                className="gap-2 bg-[#456926] hover:bg-[#233620]"
+              >
+                <SparkleIcon className="h-5 w-5" />
+                Search vendors with AI
+              </Button>
+            </Link>
             <Link href="/companies">
               <Button
                 variant="accent"

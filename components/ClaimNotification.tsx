@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { getUnclaimedCompanyForCurrentUser } from "@/app/actions/claim-company";
 
-const DISMISS_KEY = "dataist-claim-notification-dismissed";
+const DISMISS_KEY = "source-signal-claim-notification-dismissed";
 
 /** True when path is /companies/:slug/claim or /companies/:slug/claim/verify */
 function isClaimPath(pathname: string): boolean {

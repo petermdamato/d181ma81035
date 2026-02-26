@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props) {
     .single();
 
   if (!company) return { title: "Vendor not found" };
-  return { title: `${company.name} – Dataist`, description: `Reviews and info for ${company.name}` };
+  return { title: `${company.name} – Source Signal`, description: `Reviews and info for ${company.name}` };
 }
 
 export default async function CompanyPage({ params }: Props) {

@@ -9,7 +9,7 @@ export function Footer() {
             href="/"
             className="text-lg font-semibold text-white hover:text-[#ACAEA1] transition-colors"
           >
-            Dataist
+            Source Signal
           </Link>
           <nav className="flex flex-wrap gap-6 text-sm">
             <Link href="/companies" className="hover:text-white transition-colors">

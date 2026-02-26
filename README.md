@@ -1,4 +1,4 @@
-# Dataist
+# Source Signal
 
 A G2-style directory where registered users can browse data vendors and leave reviews. Built with **Next.js** (App Router) and **Supabase**.
 
@@ -81,6 +81,10 @@ To let companies claim their profile (email verification, then only they can edi
 - **URL:** Set `NEXT_PUBLIC_APP_URL` in production (e.g. `https://yourdomain.com`) so verification emails use the correct link.
 
 Run migration `010_company_claimed_and_claim_tokens.sql` so `companies` has `claimed`, `claimed_contact`, `claimed_by_user_id` and the `company_claim_tokens` table exists.
+
+### AI vendor search (optional)
+
+The “Search vendors with AI” flow uses OpenAI to collect search criteria via chat and then rank matching vendors. Set `OPENAI_API_KEY` in `.env.local`. The app uses the `gpt-4o-mini` model. Run migration `011_ai_search_sessions.sql` to store search sessions.
 
 ## Requirements
 

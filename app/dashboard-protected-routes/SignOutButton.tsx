@@ -16,7 +16,7 @@ export function SignOutButton({ variant = "ghost", size = "sm" }: SignOutButtonP
     const supabase = createClient();
     await supabase.auth.signOut();
     if (typeof window !== "undefined") {
-      sessionStorage.removeItem("dataist-claim-notification-dismissed");
+      sessionStorage.removeItem("source-signal-claim-notification-dismissed");
     }
     router.push("/");
     router.refresh();

@@ -9,7 +9,7 @@ import crypto from "crypto";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev";
-const APP_NAME = "Dataist";
+const APP_NAME = "Source Signal";
 
 /** Extract allowed email domain(s) from company website URL. Returns e.g. ["acme.com", "www.acme.com"] */
 function getAllowedDomains(websiteUrl: string | null): string[] {

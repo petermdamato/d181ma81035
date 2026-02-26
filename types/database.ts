@@ -84,6 +84,26 @@ export interface Database {
         };
         Update: Partial<Database["public"]["Tables"]["company_claim_tokens"]["Insert"]>;
       };
+      ai_search_sessions: {
+        Row: {
+          id: string;
+          created_at: string;
+          topic: string | null;
+          subject_population: string | null;
+          years_dates: string | null;
+          ownership: string | null;
+          data_type: string | null;
+          data_use: string | null;
+          geography: string | null;
+          other_details: string | null;
+          raw_messages: unknown;
+        };
+        Insert: Omit<Database["public"]["Tables"]["ai_search_sessions"]["Row"], "id" | "created_at"> & {
+          id?: string;
+          created_at?: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["ai_search_sessions"]["Insert"]>;
+      };
       reviews: {
         Row: {
           id: string;

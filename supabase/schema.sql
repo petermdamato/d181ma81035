@@ -1,4 +1,4 @@
--- Dataist: data vendor directory schema for Supabase
+-- Source Signal: data vendor directory schema for Supabase
 -- Run this in the Supabase SQL editor to create tables.
 
 -- Profiles (display names, synced from auth.users)
@@ -46,6 +46,24 @@ create table if not exists public.company_claim_tokens (
 );
 
 alter table public.company_claim_tokens enable row level security;
+
+-- AI vendor search sessions (collected criteria per search)
+create table if not exists public.ai_search_sessions (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz default now(),
+  topic text,
+  subject_population text,
+  years_dates text,
+  ownership text,
+  data_type text,
+  data_use text,
+  geography text,
+  other_details text,
+  raw_messages jsonb
+);
+alter table public.ai_search_sessions enable row level security;
+create policy "Anyone can insert ai_search_sessions" on public.ai_search_sessions for insert with check (true);
+create policy "Anyone can select ai_search_sessions" on public.ai_search_sessions for select using (true);
 
 -- Delivery methods (fixed list; companies.delivery_method_ids references these)
 create table if not exists public.data_delivery_methods (

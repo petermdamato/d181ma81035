@@ -13,7 +13,7 @@ export async function Header() {
           href="/"
           className="text-xl font-bold tracking-tight text-white hover:text-[#ACAEA1] transition-colors"
         >
-          Dataist
+          Source Signal
         </Link>
         <nav className="flex items-center gap-6">
           <Link

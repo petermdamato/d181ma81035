@@ -8,7 +8,7 @@ export function HowItWorksStrip() {
     >
       <div className="mx-auto max-w-6xl px-4 py-16">
         <h2 className="text-2xl font-semibold text-center text-[#ACAEA1] mb-12">
-          How Dataist works
+          How Source Signal works
         </h2>
         <div className="grid gap-10 md:grid-cols-3">
           <div className="flex flex-col">
