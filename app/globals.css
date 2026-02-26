@@ -1,26 +1,63 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary palette */
+  --color-primary: #456926;
+  --color-primary-dark: #233620;
+  --color-primary-muted: #546B4C;
+  --color-bg-dark: #071205;
+  --color-surface: #ACAEA1;
+  /* Accent */
+  --color-accent: #B4442C;
+  --color-accent-dark: #6D1C07;
+  /* Semantic */
+  --background: #f8f9f7;
+  --foreground: #071205;
+  --card: #ffffff;
+  --border: #546B4C;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-primary-muted: var(--color-primary-muted);
+  --color-bg-dark: var(--color-bg-dark);
+  --color-surface: var(--color-surface);
+  --color-accent: var(--color-accent);
+  --color-accent-dark: var(--color-accent-dark);
+  --color-card: var(--card);
+  --color-border: var(--border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Flip card for sign in / sign up */
+.flip-card-container {
+  perspective: 1000px;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+}
+.flip-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+.flip-card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+}
+.flip-card-face-back {
+  transform: rotateY(180deg);
 }

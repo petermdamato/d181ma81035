@@ -1,0 +1,66 @@
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import { createClient } from "@/lib/supabase/server";
+import { ClaimCompanyForm } from "./ClaimCompanyForm";
+
+type Props = { params: Promise<{ slug: string }> };
+
+export default async function ClaimCompanyPage({ params }: Props) {
+  const { slug } = await params;
+  const supabase = await createClient();
+  const { data: company, error } = await supabase
+    .from("companies")
+    .select("id, name, slug, website_url, claimed")
+    .eq("slug", slug)
+    .single();
+
+  if (error || !company) notFound();
+  if (company.claimed) {
+    return (
+      <div className="mx-auto max-w-lg px-4 py-16 text-center">
+        <h1 className="text-xl font-semibold text-[#233620]">Already claimed</h1>
+        <p className="mt-2 text-[#546B4C]">
+          This company profile has already been claimed. Only the verified contact can edit it.
+        </p>
+        <Link href={`/companies/${slug}`} className="mt-6 inline-block text-[#456926] hover:underline">
+          ← Back to {company.name}
+        </Link>
+      </div>
+    );
+  }
+
+  if (!company.website_url?.trim()) {
+    return (
+      <div className="mx-auto max-w-lg px-4 py-16 text-center">
+        <h1 className="text-xl font-semibold text-[#233620]">Cannot claim yet</h1>
+        <p className="mt-2 text-[#546B4C]">
+          This company does not have a website URL. Add one to the listing first, or contact support.
+        </p>
+        <Link href={`/companies/${slug}`} className="mt-6 inline-block text-[#456926] hover:underline">
+          ← Back to {company.name}
+        </Link>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mx-auto max-w-lg px-4 py-10">
+      <Link href={`/companies/${slug}`} className="text-sm text-[#546B4C] hover:text-[#456926]">
+        ← Back to {company.name}
+      </Link>
+      <h1 className="mt-6 text-2xl font-bold text-[#233620]">Claim this company</h1>
+      <p className="mt-2 text-[#546B4C]">
+        Enter a work email address that matches your company&apos;s website domain. We&apos;ll send a
+        verification link to confirm you can edit this profile.
+      </p>
+      <div className="mt-8">
+        <ClaimCompanyForm
+          companyId={company.id}
+          companySlug={company.slug}
+          companyName={company.name}
+          websiteUrl={company.website_url}
+        />
+      </div>
+    </div>
+  );
+}

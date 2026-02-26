@@ -1,0 +1,72 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { getUnclaimedCompanyForCurrentUser } from "@/app/actions/claim-company";
+
+const DISMISS_KEY = "dataist-claim-notification-dismissed";
+
+/** True when path is /companies/:slug/claim or /companies/:slug/claim/verify */
+function isClaimPath(pathname: string): boolean {
+  return /^\/companies\/[^/]+\/claim(\/|$)/.test(pathname);
+}
+
+export function ClaimNotification() {
+  const pathname = usePathname();
+  const [company, setCompany] = useState<{ slug: string; name: string } | null>(null);
+  const [dismissed, setDismissed] = useState(true); // start true so we don't flash; set false after load
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const wasDismissed = sessionStorage.getItem(DISMISS_KEY);
+    if (wasDismissed) {
+      setLoaded(true);
+      return;
+    }
+    getUnclaimedCompanyForCurrentUser().then((match) => {
+      setCompany(match ?? null);
+      setDismissed(match === null);
+      setLoaded(true);
+    });
+  }, []);
+
+  function handleDismiss() {
+    setDismissed(true);
+    if (typeof window !== "undefined") sessionStorage.setItem(DISMISS_KEY, "1");
+  }
+
+  if (isClaimPath(pathname) || !loaded || dismissed || !company) return null;
+
+  return (
+    <div
+      className="fixed left-4 top-4 z-[100] max-w-sm rounded-lg border border-[#546B4C]/40 bg-[var(--card)] p-4 shadow-lg"
+      role="status"
+      aria-live="polite"
+    >
+      <div className="flex items-start gap-3">
+        <div className="min-w-0 flex-1">
+          <p className="text-sm font-medium text-[#233620]">
+            We have a profile for your company. Do you want to claim it?
+          </p>
+          <Link
+            href={`/companies/${company.slug}/claim`}
+            className="mt-2 inline-block text-sm font-medium text-[#456926] hover:underline"
+            onClick={handleDismiss}
+          >
+            Claim {company.name} →
+          </Link>
+        </div>
+        <button
+          type="button"
+          onClick={handleDismiss}
+          className="shrink-0 rounded p-1 text-[#546B4C] hover:bg-[#ACAEA1]/20 hover:text-[#233620]"
+          aria-label="Dismiss"
+        >
+          ×
+        </button>
+      </div>
+    </div>
+  );
+}
