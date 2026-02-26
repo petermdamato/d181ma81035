@@ -222,6 +222,7 @@ export interface Database {
           value_rating: number | null;
           found_when: string | null;
           result: string | null;
+          hidden: boolean;
           created_at: string;
           updated_at: string;
         };
@@ -238,6 +239,7 @@ export interface Database {
           value_rating?: number | null;
           found_when?: string | null;
           result?: string | null;
+          hidden?: boolean;
           created_at?: string;
           updated_at?: string;
         };
@@ -254,6 +256,7 @@ export interface Database {
           value_rating?: number | null;
           found_when?: string | null;
           result?: string | null;
+          hidden?: boolean;
           created_at?: string;
           updated_at?: string;
         };

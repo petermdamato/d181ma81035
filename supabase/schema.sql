@@ -102,6 +102,7 @@ create table if not exists public.reviews (
   value_rating int default 5 check (value_rating is null or (value_rating >= 1 and value_rating <= 5)),
   found_when text,
   result text,
+  hidden boolean not null default false,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );

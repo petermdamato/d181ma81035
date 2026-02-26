@@ -16,6 +16,7 @@ export async function fetchReviewsWithProfiles(
   let query = supabase
     .from("reviews")
     .select("*, companies(name, slug)")
+    .eq("hidden", false)
     .order("created_at", { ascending: false });
 
   if (options?.companyId) {
