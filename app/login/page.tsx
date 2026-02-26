@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { Suspense, useState, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
@@ -14,6 +14,14 @@ function getRedirectPath(redirectTo: string | null): string {
 }
 
 export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
+  );
+}
+
+function LoginForm() {
   const searchParams = useSearchParams();
   const redirectTo = useMemo(() => getRedirectPath(searchParams.get("redirectTo")), [searchParams]);
   const [isSignUp, setIsSignUp] = useState(false);
