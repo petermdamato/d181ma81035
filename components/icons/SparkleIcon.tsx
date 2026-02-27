@@ -1,15 +1,16 @@
 import { cn } from "@/lib/utils";
 
-type Props = { className?: string };
+type Props = { className?: string; style?: React.CSSProperties };
 
 /** AI/magic sparkle icon for "Search vendors with AI" */
-export function SparkleIcon({ className }: Props) {
+export function SparkleIcon({ className, style }: Props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
       className={cn("shrink-0", className)}
+      style={style}
       aria-hidden
     >
       <path
