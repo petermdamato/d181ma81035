@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { createClient } from "@/lib/supabase/server";
 import { CompanyList, CategoryNav, VendorSearch } from "@/components/directory";
+import { FilterSidebar } from "@/components/directory/FilterSidebar";
 import { isCategory, isSubcategoryOf } from "@/lib/categories";
 
 export const metadata = {
@@ -53,23 +54,21 @@ export default async function CompaniesPage({ searchParams }: PageProps) {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
-      <div className="flex flex-col gap-8 lg:flex-row">
-        <aside className="lg:w-56 shrink-0">
-          <div className="sticky top-24 rounded-xl border border-[#546B4C]/30 bg-[var(--card)] p-4">
-            <Suspense
-              fallback={
-                <div className="animate-pulse space-y-2">
-                  <div className="h-4 w-24 rounded bg-[#ACAEA1]/30" />
-                  <div className="h-8 w-full rounded bg-[#ACAEA1]/20" />
-                  <div className="h-8 w-full rounded bg-[#ACAEA1]/20" />
-                  <div className="h-8 w-full rounded bg-[#ACAEA1]/20" />
-                </div>
-              }
-            >
-              <CategoryNav />
-            </Suspense>
-          </div>
-        </aside>
+      <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
+        <FilterSidebar>
+          <Suspense
+            fallback={
+              <div className="animate-pulse space-y-2">
+                <div className="h-4 w-24 rounded bg-[#ACAEA1]/30" />
+                <div className="h-8 w-full rounded bg-[#ACAEA1]/20" />
+                <div className="h-8 w-full rounded bg-[#ACAEA1]/20" />
+                <div className="h-8 w-full rounded bg-[#ACAEA1]/20" />
+              </div>
+            }
+          >
+            <CategoryNav />
+          </Suspense>
+        </FilterSidebar>
 
         <div className="min-w-0 flex-1">
           <h1 className="text-3xl font-bold text-[#233620]">{heading}</h1>

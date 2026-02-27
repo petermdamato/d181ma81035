@@ -103,8 +103,8 @@ function LoginForm() {
   }
 
   return (
-    <div className="mx-auto max-w-md px-4 py-16">
-      <div className="flip-card-container relative h-[540px]">
+    <div className="mx-auto max-w-md px-4 py-10 sm:py-16">
+      <div className="flip-card-container relative h-[640px] sm:h-[580px]">
         <div className={`flip-card-inner h-full w-full ${isSignUp ? "flipped" : ""}`}>
           {/* Sign in — front */}
           <div className="flip-card-face">

@@ -41,7 +41,7 @@ export function ClaimNotification() {
 
   return (
     <div
-      className="fixed left-4 top-4 z-[100] max-w-sm rounded-lg border border-[#546B4C]/40 bg-[var(--card)] p-4 shadow-lg"
+      className="fixed left-4 right-4 top-20 z-[100] max-w-sm rounded-lg border border-[#546B4C]/40 bg-[var(--card)] p-4 shadow-lg sm:right-auto sm:top-20"
       role="status"
       aria-live="polite"
     >
@@ -61,7 +61,7 @@ export function ClaimNotification() {
         <button
           type="button"
           onClick={handleDismiss}
-          className="shrink-0 rounded p-1 text-[#546B4C] hover:bg-[#ACAEA1]/20 hover:text-[#233620]"
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded text-[#546B4C] hover:bg-[#ACAEA1]/20 hover:text-[#233620]"
           aria-label="Dismiss"
         >
           ×

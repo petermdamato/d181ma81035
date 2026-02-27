@@ -81,7 +81,7 @@ export function VendorReviewsSection({ company, reviews }: VendorReviewsSectionP
       <h2 className="text-xl font-semibold text-[#233620]">Reviews</h2>
 
       <div className="mt-6 grid gap-6 rounded-xl border border-[#546B4C]/30 bg-[var(--card)] p-6">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
           <div>
             <p className="text-xs font-medium uppercase tracking-wider text-[#546B4C]">
               <RatingLabelWithTooltip label="Overall" tooltipKey="rating" />

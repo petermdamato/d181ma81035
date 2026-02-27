@@ -70,7 +70,7 @@ export function ReviewsCarousel({ reviews }: ReviewsCarouselProps) {
             disabled={!canScrollLeft}
             onScroll={updateScrollState}
             aria-label="Previous reviews"
-            className="h-9 w-9 rounded-lg border border-[#546B4C]/40 bg-white text-[#233620] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#ACAEA1]/20 transition-colors flex items-center justify-center"
+            className="h-11 w-11 rounded-lg border border-[#546B4C]/40 bg-white text-[#233620] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#ACAEA1]/20 transition-colors flex items-center justify-center"
           >
             ←
           </button>
@@ -79,7 +79,7 @@ export function ReviewsCarousel({ reviews }: ReviewsCarouselProps) {
             onClick={() => scroll("right")}
             disabled={!canScrollRight}
             aria-label="Next reviews"
-            className="h-9 w-9 rounded-lg border border-[#546B4C]/40 bg-white text-[#233620] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#ACAEA1]/20 transition-colors flex items-center justify-center"
+            className="h-11 w-11 rounded-lg border border-[#546B4C]/40 bg-white text-[#233620] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#ACAEA1]/20 transition-colors flex items-center justify-center"
           >
             →
           </button>

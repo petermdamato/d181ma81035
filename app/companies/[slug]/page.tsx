@@ -74,7 +74,7 @@ export default async function CompanyPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
-      <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
         {company.logo_url ? (
           <div className="relative h-24 w-24 shrink-0 rounded-xl overflow-hidden bg-[#ACAEA1]/20">
             <Image
@@ -91,7 +91,7 @@ export default async function CompanyPage({ params }: Props) {
         )}
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-3 gap-y-1">
-            <h1 className="text-3xl font-bold text-[#233620]">{company.name}</h1>
+            <h1 className="text-2xl font-bold text-[#233620] sm:text-3xl">{company.name}</h1>
             {company.claimed && (
               <span
                 className={
@@ -123,7 +123,7 @@ export default async function CompanyPage({ params }: Props) {
             <DataPoints names={dataPointNames} />
           </div>
         </div>
-        <div className="flex flex-wrap items-center gap-2 shrink-0">
+        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:shrink-0">
           <BookmarkButton
             companyId={company.id}
             companySlug={company.slug}
@@ -131,21 +131,21 @@ export default async function CompanyPage({ params }: Props) {
             variant="button"
           />
           {canEdit && (
-            <Link href={`/companies/${slug}/edit`}>
-              <Button variant="outline" size="md">
+            <Link href={`/companies/${slug}/edit`} className="w-full sm:w-auto">
+              <Button variant="outline" size="md" className="w-full sm:w-auto">
                 Edit profile
               </Button>
             </Link>
           )}
           {showClaimLink && (
-            <Link href={`/companies/${slug}/claim`}>
-              <Button variant="outline" size="md">
+            <Link href={`/companies/${slug}/claim`} className="w-full sm:w-auto">
+              <Button variant="outline" size="md" className="w-full sm:w-auto">
                 Claim this company
               </Button>
             </Link>
           )}
-          <Link href={`/companies/${slug}/review`}>
-            <Button variant="accent" size="md">
+          <Link href={`/companies/${slug}/review`} className="w-full sm:w-auto">
+            <Button variant="accent" size="md" className="w-full sm:w-auto">
               Write a review
             </Button>
           </Link>

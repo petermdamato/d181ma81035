@@ -171,7 +171,7 @@ export function AISearchClient() {
             </p>
           </div>
 
-          <div ref={scrollContainerRef} className="h-[420px] space-y-4 overflow-y-auto p-5 sm:p-6">
+          <div ref={scrollContainerRef} className="h-[300px] space-y-4 overflow-y-auto p-4 sm:h-[420px] sm:p-6">
             {messages.map((msg, i) => (
               <div
                 key={i}
@@ -238,8 +238,8 @@ export function AISearchClient() {
           }`}
         >
           <div className="overflow-hidden">
-            <div className="flex items-center justify-between rounded-2xl border border-[#456926]/20 bg-[#F3F8EF] px-4 py-3 sm:px-5">
-              <p className="pr-4 text-sm text-[#3E5835]">
+            <div className="flex flex-col gap-3 rounded-2xl border border-[#456926]/20 bg-[#F3F8EF] px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+              <p className="text-sm text-[#3E5835]">
                 Ready when you are. Generate matches from your current answers.
               </p>
               <Button
@@ -247,7 +247,7 @@ export function AISearchClient() {
                 size="lg"
                 onClick={handleShowResults}
                 disabled={resultsLoading || loading}
-                className="shrink-0 rounded-xl px-6"
+                className="w-full shrink-0 rounded-xl px-6 sm:w-auto"
               >
                 {resultsLoading ? "Finding vendors…" : "Show me results"}
               </Button>

@@ -52,7 +52,7 @@ export function NewVendorsRibbon({ companies }: NewVendorsRibbonProps) {
             onClick={() => scroll("left")}
             disabled={!canScrollLeft}
             aria-label="Previous vendors"
-            className="h-8 w-8 rounded-md border border-[#546B4C]/40 bg-white text-[#233620] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#ACAEA1]/30 transition-colors flex items-center justify-center text-sm"
+            className="h-11 w-11 rounded-md border border-[#546B4C]/40 bg-white text-[#233620] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#ACAEA1]/30 transition-colors flex items-center justify-center"
           >
             ←
           </button>
@@ -61,7 +61,7 @@ export function NewVendorsRibbon({ companies }: NewVendorsRibbonProps) {
             onClick={() => scroll("right")}
             disabled={!canScrollRight}
             aria-label="Next vendors"
-            className="h-8 w-8 rounded-md border border-[#546B4C]/40 bg-white text-[#233620] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#ACAEA1]/30 transition-colors flex items-center justify-center text-sm"
+            className="h-11 w-11 rounded-md border border-[#546B4C]/40 bg-white text-[#233620] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#ACAEA1]/30 transition-colors flex items-center justify-center"
           >
             →
           </button>
