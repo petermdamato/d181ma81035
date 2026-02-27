@@ -14,10 +14,7 @@ type VendorReviewsSectionProps = {
   reviews: ReviewWithProfile[];
 };
 
-function safeAvg(
-  reviews: ReviewWithProfile[],
-  key: keyof Review
-): number {
+function safeAvg(reviews: ReviewWithProfile[], key: keyof Review): number {
   const vals = reviews
     .map((r) => (r as Record<string, unknown>)[key] as number | null | undefined)
     .filter((v): v is number => typeof v === "number" && !Number.isNaN(v));
@@ -61,13 +58,13 @@ export function VendorReviewsSection({ company, reviews }: VendorReviewsSectionP
   if (reviews.length === 0) {
     return (
       <section className="mt-12">
-        <h2 className="text-xl font-semibold text-[#233620]">Reviews</h2>
-        <div className="mt-4 rounded-xl border border-[#546B4C]/30 bg-[var(--card)] p-12 text-center text-[#546B4C]">
+        <h2 className="text-xl font-semibold text-[#2C4C5C]">Reviews</h2>
+        <div className="mt-4 rounded-xl border border-[#6C8494]/25 bg-[var(--card)] p-12 text-center text-[#6C8494]">
           <p className="font-medium">No reviews yet</p>
           <p className="mt-1 text-sm">Be the first to review this vendor.</p>
           <Link
             href={`/companies/${company.slug}/review`}
-            className="mt-4 inline-block text-[#456926] hover:underline text-sm font-medium"
+            className="mt-4 inline-block text-sm font-medium text-[#6C8494] hover:text-[#2C4C5C] hover:underline transition-colors"
           >
             Write a review →
           </Link>
@@ -78,61 +75,47 @@ export function VendorReviewsSection({ company, reviews }: VendorReviewsSectionP
 
   return (
     <section className="mt-12">
-      <h2 className="text-xl font-semibold text-[#233620]">Reviews</h2>
+      <h2 className="text-xl font-semibold text-[#2C4C5C]">Reviews</h2>
 
-      <div className="mt-6 grid gap-6 rounded-xl border border-[#546B4C]/30 bg-[var(--card)] p-6">
+      <div className="mt-6 grid gap-6 rounded-xl border border-[#6C8494]/25 bg-[var(--card)] p-6">
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-          <div>
-            <p className="text-xs font-medium uppercase tracking-wider text-[#546B4C]">
-              <RatingLabelWithTooltip label="Overall" tooltipKey="rating" />
-            </p>
-            <Stars rating={avgRating} />
-            <p className="mt-1 text-sm text-[#546B4C]">
-              {reviews.length} review{reviews.length !== 1 ? "s" : ""}
-            </p>
-          </div>
-          <div>
-            <p className="text-xs font-medium uppercase tracking-wider text-[#546B4C]">
-              <RatingLabelWithTooltip label="Accessibility" tooltipKey="ease_of_access_rating" />
-            </p>
-            <Stars rating={avgAccessibility} />
-          </div>
-          <div>
-            <p className="text-xs font-medium uppercase tracking-wider text-[#546B4C]">
-              <RatingLabelWithTooltip label="Sales Team" tooltipKey="sales_team_rating" />
-            </p>
-            <Stars rating={avgSalesTeam} />
-          </div>
-          <div>
-            <p className="text-xs font-medium uppercase tracking-wider text-[#546B4C]">
-              <RatingLabelWithTooltip label="Data Coverage" tooltipKey="data_coverage_rating" />
-            </p>
-            <Stars rating={avgDataCoverage} />
-          </div>
-          <div>
-            <p className="text-xs font-medium uppercase tracking-wider text-[#546B4C]">
-              <RatingLabelWithTooltip label="Value" tooltipKey="value_rating" />
-            </p>
-            <Stars rating={avgValue} />
-          </div>
+          {[
+            { avg: avgRating, label: "Overall", key: "rating" as const },
+            { avg: avgAccessibility, label: "Accessibility", key: "ease_of_access_rating" as const },
+            { avg: avgSalesTeam, label: "Sales Team", key: "sales_team_rating" as const },
+            { avg: avgDataCoverage, label: "Data Coverage", key: "data_coverage_rating" as const },
+            { avg: avgValue, label: "Value", key: "value_rating" as const },
+          ].map(({ avg, label, key }, i) => (
+            <div key={key}>
+              <p className="mb-1 text-xs font-medium uppercase tracking-wider text-[#6C8494]">
+                <RatingLabelWithTooltip label={label} tooltipKey={key} />
+              </p>
+              <Stars rating={avg} />
+              {i === 0 && (
+                <p className="mt-1 text-sm text-[#6C8494]">
+                  {reviews.length} review{reviews.length !== 1 ? "s" : ""}
+                </p>
+              )}
+            </div>
+          ))}
         </div>
 
-        <div className="border-t border-[#546B4C]/20 pt-4">
-          <p className="text-sm font-medium text-[#233620] mb-2">Rating distribution</p>
+        <div className="border-t border-[#6C8494]/20 pt-4">
+          <p className="mb-2 text-sm font-medium text-[#2C4C5C]">Rating distribution</p>
           <div className="space-y-2">
             {([5, 4, 3, 2, 1] as const).map((stars) => {
               const count = distribution[stars];
               const pct = totalForDistribution ? (count / totalForDistribution) * 100 : 0;
               return (
                 <div key={stars} className="flex items-center gap-2 text-sm">
-                  <span className="w-16 text-[#546B4C]">{stars} star</span>
-                  <div className="flex-1 h-2 bg-[#ACAEA1]/30 rounded-full overflow-hidden">
+                  <span className="w-16 text-[#6C8494]">{stars} star</span>
+                  <div className="h-2 flex-1 overflow-hidden rounded-full bg-[#B8BFC1]/40">
                     <div
-                      className="h-full bg-[#456926] rounded-full"
+                      className="h-full rounded-full bg-[#F3E308]"
                       style={{ width: `${pct}%` }}
                     />
                   </div>
-                  <span className="w-8 text-right text-[#546B4C]">{count}</span>
+                  <span className="w-8 text-right text-[#6C8494]">{count}</span>
                 </div>
               );
             })}
@@ -144,7 +127,7 @@ export function VendorReviewsSection({ company, reviews }: VendorReviewsSectionP
         <button
           type="button"
           onClick={() => setExpanded(!expanded)}
-          className="text-[#456926] font-medium hover:underline"
+          className="font-medium text-[#6C8494] hover:text-[#2C4C5C] hover:underline transition-colors"
         >
           {expanded ? "Hide reviews" : "Show all reviews"}
         </button>
@@ -152,9 +135,7 @@ export function VendorReviewsSection({ company, reviews }: VendorReviewsSectionP
         {expanded && (
           <div className="mt-4 space-y-4">
             <div className="max-w-md">
-              <label htmlFor="review-search" className="sr-only">
-                Search reviews
-              </label>
+              <label htmlFor="review-search" className="sr-only">Search reviews</label>
               <Input
                 id="review-search"
                 type="search"
@@ -166,7 +147,7 @@ export function VendorReviewsSection({ company, reviews }: VendorReviewsSectionP
             </div>
 
             {filteredReviews.length === 0 ? (
-              <p className="text-sm text-[#546B4C]">
+              <p className="text-sm text-[#6C8494]">
                 No reviews match &quot;{searchTerm}&quot;.
               </p>
             ) : (

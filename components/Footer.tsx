@@ -2,12 +2,12 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="border-t border-[#546B4C]/30 bg-[#071205] text-[#ACAEA1]">
+    <footer className="border-t border-[#2C4C5C]/30 bg-[#2C4C5C] text-[#B8BFC1]">
       <div className="mx-auto max-w-6xl px-4 py-10">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <Link
             href="/"
-            className="text-lg font-semibold text-white hover:text-[#ACAEA1] transition-colors"
+            className="text-lg font-semibold text-white hover:text-[#F3E308] transition-colors"
           >
             Source Signal
           </Link>
@@ -23,7 +23,7 @@ export function Footer() {
             </Link>
           </nav>
         </div>
-        <p className="mt-8 text-sm text-[#546B4C]">
+        <p className="mt-8 text-sm text-[#B8BFC1]/60">
           The directory for data vendor reviews. Share your experience and help others choose.
         </p>
       </div>

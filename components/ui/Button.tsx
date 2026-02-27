@@ -9,13 +9,13 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const variants = {
   primary:
-    "bg-[#456926] text-white hover:bg-[#233620] border border-[#233620]",
+    "bg-[#2C4C5C] text-white hover:bg-[#1e3642] border border-[#1e3642]",
   accent:
-    "bg-[#B4442C] text-white hover:bg-[#6D1C07] border border-[#6D1C07]",
+    "bg-[#6C8494] text-white hover:bg-[#4a6070] border border-[#4a6070]",
   outline:
-    "border border-[#546B4C] text-[#071205] bg-transparent hover:bg-[#546B4C]/10",
+    "border border-[#2C4C5C] text-[#2C4C5C] bg-transparent hover:bg-[#2C4C5C]/10",
   ghost:
-    "text-[#071205] hover:bg-[#ACAEA1]/30",
+    "text-[#2C4C5C] hover:bg-[#B8BFC1]/50",
 };
 
 const sizes = {

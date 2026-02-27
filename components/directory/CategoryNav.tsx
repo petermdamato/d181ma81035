@@ -34,10 +34,9 @@ export function CategoryNav({ className }: CategoryNavProps) {
       ? CATEGORIES[activeCategory as CategoryName]
       : [];
 
-  const linkClass =
-    "block rounded-lg px-3 py-2 text-sm font-medium transition-colors";
-  const activeClass = "bg-[#456926] text-white";
-  const inactiveClass = "text-[#546B4C] hover:bg-[#ACAEA1]/30 hover:text-[#233620]";
+  const linkClass = "block rounded-lg px-3 py-2 text-sm font-medium transition-colors";
+  const activeClass = "bg-[#F3E308] text-[#2C4C5C] font-semibold";
+  const inactiveClass = "text-[#2C4C5C] hover:bg-[#B8BFC1]/40 hover:text-[#2C4C5C]";
 
   return (
     <nav
@@ -45,17 +44,14 @@ export function CategoryNav({ className }: CategoryNavProps) {
       aria-label="Browse by category"
     >
       <div>
-        <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-[#546B4C]">
+        <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-[#6C8494]">
           Category
         </h2>
         <ul className="space-y-0.5">
           <li>
             <Link
               href={buildUrl(null, null, searchQuery)}
-              className={cn(
-                linkClass,
-                !category ? activeClass : inactiveClass
-              )}
+              className={cn(linkClass, !category ? activeClass : inactiveClass)}
             >
               All vendors
             </Link>
@@ -64,10 +60,7 @@ export function CategoryNav({ className }: CategoryNavProps) {
             <li key={cat}>
               <Link
                 href={buildUrl(cat, null, searchQuery)}
-                className={cn(
-                  linkClass,
-                  category === cat ? activeClass : inactiveClass
-                )}
+                className={cn(linkClass, category === cat ? activeClass : inactiveClass)}
               >
                 {cat}
               </Link>
@@ -78,17 +71,14 @@ export function CategoryNav({ className }: CategoryNavProps) {
 
       {subcategories.length > 0 && (
         <div>
-          <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-[#546B4C]">
+          <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-[#6C8494]">
             {activeCategory} – Subcategory
           </h2>
           <ul className="space-y-0.5">
             <li>
               <Link
                 href={buildUrl(activeCategory!, null, searchQuery)}
-                className={cn(
-                  linkClass,
-                  !subcategory ? activeClass : inactiveClass
-                )}
+                className={cn(linkClass, !subcategory ? activeClass : inactiveClass)}
               >
                 All
               </Link>
@@ -97,10 +87,7 @@ export function CategoryNav({ className }: CategoryNavProps) {
               <li key={sub}>
                 <Link
                   href={buildUrl(activeCategory!, sub, searchQuery)}
-                  className={cn(
-                    linkClass,
-                    subcategory === sub ? activeClass : inactiveClass
-                  )}
+                  className={cn(linkClass, subcategory === sub ? activeClass : inactiveClass)}
                 >
                   {sub}
                 </Link>

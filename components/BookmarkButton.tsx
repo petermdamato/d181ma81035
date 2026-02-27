@@ -38,16 +38,16 @@ export function BookmarkButton({
         type="button"
         onClick={handleClick}
         disabled={pending}
-        className="inline-flex items-center gap-2 rounded-lg border border-[#546B4C]/50 bg-white px-3 py-2 text-sm font-medium text-[#233620] hover:bg-[#ACAEA1]/10 transition-colors disabled:opacity-50 cursor-pointer"
+        className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-[#6C8494]/30 bg-white px-3 py-2 text-sm font-medium text-[#2C4C5C] transition-colors hover:bg-[#B8BFC1]/25 disabled:opacity-50"
       >
         {isBookmarked ? (
           <>
-            <span aria-hidden>★</span>
+            <span aria-hidden className="text-[#F3E308]">★</span>
             Saved
           </>
         ) : (
           <>
-            <span aria-hidden className="text-[#ACAEA1]">☆</span>
+            <span aria-hidden className="text-[#B8BFC1]">☆</span>
             Save
           </>
         )}
@@ -60,14 +60,14 @@ export function BookmarkButton({
       type="button"
       onClick={handleClick}
       disabled={pending}
-      className="rounded p-1.5 text-lg transition-colors hover:bg-[#ACAEA1]/20 disabled:opacity-50 cursor-pointer"
+      className="cursor-pointer rounded p-1.5 text-lg transition-colors hover:bg-[#B8BFC1]/30 disabled:opacity-50"
       aria-label={isBookmarked ? "Remove bookmark" : "Bookmark company"}
       title={isBookmarked ? "Remove bookmark" : "Bookmark company"}
     >
       {isBookmarked ? (
-        <span className="text-[#B4442C]" aria-hidden>★</span>
+        <span className="text-[#F3E308]" aria-hidden>★</span>
       ) : (
-        <span className="text-[#ACAEA1] hover:text-[#546B4C]" aria-hidden>☆</span>
+        <span className="text-[#B8BFC1]" aria-hidden>☆</span>
       )}
     </button>
   );

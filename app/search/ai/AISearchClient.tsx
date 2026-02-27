@@ -14,11 +14,11 @@ const INITIAL_ASSISTANT = "What are you searching for?";
 
 function BouncingDots() {
   return (
-    <div className="flex items-center gap-1.5 rounded-2xl rounded-bl-md bg-[#EEF4EA] px-4 py-3">
+    <div className="flex items-center gap-1.5 rounded-2xl rounded-bl-md bg-[#EAF0F4] px-4 py-3">
       {[0, 1, 2].map((i) => (
         <span
           key={i}
-          className="inline-block h-1.5 w-1.5 rounded-full bg-[#546B4C]/70 animate-bounce"
+          className="inline-block h-1.5 w-1.5 rounded-full bg-[#6C8494] animate-bounce"
           style={{ animationDelay: `${i * 150}ms`, animationDuration: "0.7s" }}
         />
       ))}
@@ -48,13 +48,11 @@ export function AISearchClient() {
   const userAnswerCount = messages.filter((m) => m.role === "user").length;
   const canShowResults = showResultsButton || userAnswerCount >= 2;
 
-  // Scroll only the chat panel — never the page
   function scrollChatToBottom() {
     const el = scrollContainerRef.current;
     if (el) el.scrollTop = el.scrollHeight;
   }
 
-  // Detect when a new assistant message is appended and start typing it
   useEffect(() => {
     if (messages.length > prevCountRef.current) {
       const last = messages[messages.length - 1];
@@ -66,33 +64,20 @@ export function AISearchClient() {
     prevCountRef.current = messages.length;
   }, [messages]);
 
-  // Typing animation timer
   useEffect(() => {
     if (typingIndex === null) return;
     const fullText = messages[typingIndex]?.content ?? "";
-    if (typingChars >= fullText.length) {
-      setTypingIndex(null);
-      return;
-    }
+    if (typingChars >= fullText.length) { setTypingIndex(null); return; }
     const speed = fullText.length > 120 ? 10 : 16;
     const step = fullText.length > 200 ? 3 : 2;
-    const timer = setTimeout(
-      () => setTypingChars((c) => Math.min(c + step, fullText.length)),
-      speed,
-    );
+    const timer = setTimeout(() => setTypingChars((c) => Math.min(c + step, fullText.length)), speed);
     return () => clearTimeout(timer);
   }, [typingIndex, typingChars, messages]);
 
-  // Scroll chat panel (not the page) to bottom on new messages
-  useEffect(() => {
-    scrollChatToBottom();
-  }, [messages, loading]);
+  useEffect(() => { scrollChatToBottom(); }, [messages, loading]);
 
-  // Keep chat panel scrolled during typewriter reveal
   useEffect(() => {
-    if (typingIndex !== null && typingChars % 12 === 0) {
-      scrollChatToBottom();
-    }
+    if (typingIndex !== null && typingChars % 12 === 0) scrollChatToBottom();
   }, [typingChars, typingIndex]);
 
   async function handleSend() {
@@ -113,10 +98,7 @@ export function AISearchClient() {
       if (!res.ok) throw new Error(data.error ?? "Request failed");
       setCriteria(data.criteria ?? criteria);
       setShowResultsButton(!!data.showResultsButton || userAnswerCount + 1 >= 2);
-      setMessages((m) => [
-        ...m,
-        { role: "assistant", content: data.assistantMessage },
-      ]);
+      setMessages((m) => [...m, { role: "assistant", content: data.assistantMessage }]);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Something went wrong");
     } finally {
@@ -135,9 +117,7 @@ export function AISearchClient() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ criteria, rawMessages: messages }),
       });
-      const data = (await res.json()) as AISearchResultsResponse & {
-        error?: string;
-      };
+      const data = (await res.json()) as AISearchResultsResponse & { error?: string };
       if (!res.ok) throw new Error(data.error ?? "Request failed");
       setResultsSummary(data.assistantSummary ?? null);
       setResults(data.results ?? []);
@@ -159,15 +139,12 @@ export function AISearchClient() {
       `}</style>
 
       <div className="space-y-6">
-        {/* ── Chat panel ── fixed height so nothing below shifts */}
-        <div className="flex flex-col overflow-hidden rounded-2xl border border-[#546B4C]/20 bg-white shadow-sm">
-          <div className="border-b border-[#546B4C]/10 bg-[#F7FAF5] px-5 py-4 sm:px-6">
-            <p className="text-sm font-medium text-[#233620]">
-              Guided vendor search
-            </p>
-            <p className="mt-1 text-xs text-[#546B4C]">
-              Share details in your own words. You can view matches after two
-              answers.
+        {/* Chat panel */}
+        <div className="flex flex-col overflow-hidden rounded-2xl border border-[#6C8494]/25 bg-white shadow-sm">
+          <div className="border-b border-[#6C8494]/15 bg-[#EAF0F4] px-5 py-4 sm:px-6">
+            <p className="text-sm font-medium text-[#2C4C5C]">Guided vendor search</p>
+            <p className="mt-1 text-xs text-[#6C8494]">
+              Share details in your own words. You can view matches after two answers.
             </p>
           </div>
 
@@ -175,21 +152,19 @@ export function AISearchClient() {
             {messages.map((msg, i) => (
               <div
                 key={i}
-                className={`ai-fade-in ${
-                  msg.role === "user" ? "flex justify-end" : "flex justify-start"
-                }`}
+                className={`ai-fade-in ${msg.role === "user" ? "flex justify-end" : "flex justify-start"}`}
               >
                 <div
                   className={
                     msg.role === "user"
-                      ? "max-w-[86%] rounded-2xl rounded-br-md bg-[#456926]/15 px-4 py-3 text-sm leading-relaxed text-[#233620] sm:text-[15px]"
-                      : "max-w-[86%] rounded-2xl rounded-bl-md bg-[#EEF4EA] px-4 py-3 text-sm leading-relaxed text-[#233620] sm:text-[15px]"
+                      ? "max-w-[86%] rounded-2xl rounded-br-md bg-[#2C4C5C]/12 px-4 py-3 text-sm leading-relaxed text-[#2C4C5C] sm:text-[15px]"
+                      : "max-w-[86%] rounded-2xl rounded-bl-md bg-[#EAF0F4] px-4 py-3 text-sm leading-relaxed text-[#2C4C5C] sm:text-[15px]"
                   }
                 >
                   {msg.role === "assistant" && typingIndex === i ? (
                     <>
                       {msg.content.slice(0, typingChars)}
-                      <span className="ml-px inline-block h-[1.1em] w-[2px] animate-pulse bg-[#546B4C]/40 align-text-bottom" />
+                      <span className="ml-px inline-block h-[1.1em] w-[2px] animate-pulse bg-[#6C8494]/60 align-text-bottom" />
                     </>
                   ) : (
                     msg.content
@@ -203,21 +178,17 @@ export function AISearchClient() {
                 <BouncingDots />
               </div>
             )}
-
-
           </div>
 
-          <div className="flex flex-col gap-3 border-t border-[#546B4C]/15 bg-[#FCFDFC] p-4 sm:flex-row sm:items-center sm:gap-4 sm:p-5">
+          <div className="flex flex-col gap-3 border-t border-[#6C8494]/15 bg-[#f4f7f9] p-4 sm:flex-row sm:items-center sm:gap-4 sm:p-5">
             <Input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) =>
-                e.key === "Enter" && !e.shiftKey && handleSend()
-              }
+              onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend()}
               placeholder="Type your answer…"
               disabled={loading}
-              className="h-11 flex-1 rounded-xl border-[#546B4C]/30 bg-white px-4 text-sm"
+              className="h-11 flex-1 rounded-xl px-4 text-sm"
             />
             <Button
               onClick={handleSend}
@@ -229,7 +200,7 @@ export function AISearchClient() {
           </div>
         </div>
 
-        {/* ── Show-results CTA ── always in DOM; animates in/out via grid-rows */}
+        {/* Show-results CTA */}
         <div
           className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
             canShowResults && !results
@@ -238,16 +209,16 @@ export function AISearchClient() {
           }`}
         >
           <div className="overflow-hidden">
-            <div className="flex flex-col gap-3 rounded-2xl border border-[#456926]/20 bg-[#F3F8EF] px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
-              <p className="text-sm text-[#3E5835]">
+            <div className="flex flex-col gap-3 rounded-2xl border border-[#6C8494]/25 bg-[#EAF0F4] px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+              <p className="text-sm text-[#2C4C5C]">
                 Ready when you are. Generate matches from your current answers.
               </p>
               <Button
-                variant="accent"
+                variant="primary"
                 size="lg"
                 onClick={handleShowResults}
                 disabled={resultsLoading || loading}
-                className="w-full shrink-0 rounded-xl px-6 sm:w-auto"
+                className="w-full shrink-0 rounded-xl bg-[#F3E308] text-[#2C4C5C] hover:bg-[#d4c807] border-[#c9bd06] px-6 sm:w-auto"
               >
                 {resultsLoading ? "Finding vendors…" : "Show me results"}
               </Button>
@@ -255,57 +226,52 @@ export function AISearchClient() {
           </div>
         </div>
 
-        {/* ── Error ── */}
+        {/* Error */}
         {error && (
-          <p className="ai-fade-in rounded-xl border border-[#B4442C]/20 bg-[#FFF5F3] px-4 py-3 text-sm text-[#B4442C]">
+          <p className="ai-fade-in rounded-xl border border-[#E05A48]/25 bg-[#E05A48]/8 px-4 py-3 text-sm text-[#E05A48]">
             {error}
           </p>
         )}
 
-        {/* ── Results ── */}
+        {/* Results */}
         {results && (
-          <section className="ai-fade-in rounded-2xl border border-[#546B4C]/15 bg-white p-5 shadow-sm sm:p-6">
-            <h2 className="text-xl font-semibold text-[#233620]">
+          <section className="ai-fade-in rounded-2xl border border-[#6C8494]/20 bg-white p-5 shadow-sm sm:p-6">
+            <h2 className="text-xl font-semibold text-[#2C4C5C]">
               Vendors that match your search
             </h2>
             {resultsSummary && (
-              <p className="mt-2 rounded-xl border border-[#546B4C]/15 bg-[#F7FAF5] px-4 py-3 text-sm text-[#3E5835]">
+              <p className="mt-2 rounded-xl border border-[#6C8494]/20 bg-[#EAF0F4] px-4 py-3 text-sm text-[#2C4C5C]">
                 {resultsSummary}
               </p>
             )}
             <ul className="mt-5 grid gap-4 sm:grid-cols-2">
               {results.length === 0 ? (
-                <li className="rounded-xl border border-[#546B4C]/30 bg-[var(--card)] p-4 text-[#546B4C] sm:col-span-2">
-                  No vendors matched. Try broadening your criteria or browse all
-                  vendors.
+                <li className="rounded-xl border border-[#6C8494]/25 bg-[var(--card)] p-4 text-[#6C8494] sm:col-span-2">
+                  No vendors matched. Try broadening your criteria or browse all vendors.
                 </li>
               ) : (
                 results.map((c, idx) => (
                   <li
                     key={c.id}
-                    className="ai-fade-in rounded-xl border border-[#546B4C]/25 bg-[#FCFDFC] p-4 transition-shadow hover:shadow-sm"
+                    className="ai-fade-in rounded-xl border border-[#6C8494]/20 bg-white p-4 transition-shadow hover:shadow-sm hover:border-[#6C8494]/40"
                     style={{ animationDelay: `${idx * 60}ms` }}
                   >
                     <Link
                       href={`/companies/${c.slug}`}
-                      className="font-medium text-[#456926] hover:underline"
+                      className="font-medium text-[#2C4C5C] hover:underline"
                     >
                       {c.name}
                     </Link>
                     {(c.category || c.subcategory) && (
-                      <p className="mt-1 text-xs text-[#546B4C]">
+                      <p className="mt-1 text-xs text-[#6C8494]">
                         {[c.category, c.subcategory].filter(Boolean).join(" · ")}
                       </p>
                     )}
                     {c.description && (
-                      <p className="mt-2 text-sm text-[#233620] line-clamp-2">
-                        {c.description}
-                      </p>
+                      <p className="mt-2 text-sm text-[#2C4C5C] line-clamp-2">{c.description}</p>
                     )}
                     {c.matchReason && (
-                      <p className="mt-2 text-xs text-[#456926]">
-                        {c.matchReason}
-                      </p>
+                      <p className="mt-2 text-xs text-[#6C8494]">{c.matchReason}</p>
                     )}
                   </li>
                 ))

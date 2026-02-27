@@ -7,7 +7,6 @@ import { getUnclaimedCompanyForCurrentUser } from "@/app/actions/claim-company";
 
 const DISMISS_KEY = "source-signal-claim-notification-dismissed";
 
-/** True when path is /companies/:slug/claim or /companies/:slug/claim/verify */
 function isClaimPath(pathname: string): boolean {
   return /^\/companies\/[^/]+\/claim(\/|$)/.test(pathname);
 }
@@ -15,7 +14,7 @@ function isClaimPath(pathname: string): boolean {
 export function ClaimNotification() {
   const pathname = usePathname();
   const [company, setCompany] = useState<{ slug: string; name: string } | null>(null);
-  const [dismissed, setDismissed] = useState(true); // start true so we don't flash; set false after load
+  const [dismissed, setDismissed] = useState(true);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -41,18 +40,18 @@ export function ClaimNotification() {
 
   return (
     <div
-      className="fixed left-4 right-4 top-20 z-[100] max-w-sm rounded-lg border border-[#546B4C]/40 bg-[var(--card)] p-4 shadow-lg sm:right-auto sm:top-20"
+      className="fixed left-4 right-4 top-20 z-[100] max-w-sm rounded-lg border border-[#6C8494]/30 bg-white p-4 shadow-lg sm:right-auto sm:top-20"
       role="status"
       aria-live="polite"
     >
       <div className="flex items-start gap-3">
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-medium text-[#233620]">
+          <p className="text-sm font-medium text-[#2C4C5C]">
             We have a profile for your company. Do you want to claim it?
           </p>
           <Link
             href={`/companies/${company.slug}/claim`}
-            className="mt-2 inline-block text-sm font-medium text-[#456926] hover:underline"
+            className="mt-2 inline-block text-sm font-medium text-[#6C8494] hover:text-[#2C4C5C] hover:underline transition-colors"
             onClick={handleDismiss}
           >
             Claim {company.name} →
@@ -61,7 +60,7 @@ export function ClaimNotification() {
         <button
           type="button"
           onClick={handleDismiss}
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded text-[#546B4C] hover:bg-[#ACAEA1]/20 hover:text-[#233620]"
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded text-[#6C8494] hover:bg-[#B8BFC1]/40 hover:text-[#2C4C5C]"
           aria-label="Dismiss"
         >
           ×

@@ -8,7 +8,7 @@ export async function Header() {
   const { data: { user } } = await supabase.auth.getUser();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[#546B4C]/30 bg-[#071205]/95 backdrop-blur supports-[backdrop-filter]:bg-[#071205]/80">
+    <header className="sticky top-0 z-50 w-full border-b border-[#2C4C5C]/40 bg-[#2C4C5C]/97 backdrop-blur supports-[backdrop-filter]:bg-[#2C4C5C]/92">
       <div className="relative mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
 
         {/* Left: hamburger (mobile) + logo */}
@@ -16,7 +16,7 @@ export async function Header() {
           <MobileMenu isLoggedIn={!!user} />
           <Link
             href="/"
-            className="text-xl font-bold tracking-tight text-white hover:text-[#ACAEA1] transition-colors"
+            className="text-xl font-bold tracking-tight text-white hover:text-[#F3E308] transition-colors"
           >
             Source Signal
           </Link>
@@ -26,23 +26,23 @@ export async function Header() {
         <nav className="hidden min-[551px]:flex items-center gap-6">
           <Link
             href="/companies"
-            className="text-sm font-medium text-[#ACAEA1] hover:text-white transition-colors"
+            className="text-sm font-medium text-[#B8BFC1] hover:text-white transition-colors"
           >
             Vendors
           </Link>
           <Link
             href="/reviews"
-            className="text-sm font-medium text-[#ACAEA1] hover:text-white transition-colors"
+            className="text-sm font-medium text-[#B8BFC1] hover:text-white transition-colors"
           >
             Reviews
           </Link>
           <Link href="/dashboard-protected-routes">
-            <Button variant="outline" size="sm" className="border-[#ACAEA1] text-[#ACAEA1] hover:bg-[#ACAEA1]/10">
+            <Button variant="outline" size="sm" className="border-[#B8BFC1]/60 text-[#B8BFC1] hover:bg-[#B8BFC1]/15 hover:text-white">
               Dashboard
             </Button>
           </Link>
           <Link href={user ? "/dashboard-protected-routes/profile" : "/login"}>
-            <Button variant="accent" size="sm">
+            <Button variant="primary" size="sm">
               {user ? "Account" : "Sign in"}
             </Button>
           </Link>
@@ -53,7 +53,7 @@ export async function Header() {
           href={user ? "/dashboard-protected-routes/profile" : "/login"}
           className="min-[551px]:hidden"
         >
-          <Button variant="accent" size="sm">
+          <Button variant="primary" size="sm">
             {user ? "Account" : "Sign in"}
           </Button>
         </Link>

@@ -42,10 +42,10 @@ export default async function CompaniesPage({ searchParams }: PageProps) {
   const description =
     searchQuery && searchQuery.trim()
       ? category && subcategory
-        ? `Vendors in ${subcategory} (${category}) matching “${searchQuery.trim()}”.`
+        ? `Vendors in ${subcategory} (${category}) matching "${searchQuery.trim()}".`
         : category
-          ? `Vendors in ${category} matching “${searchQuery.trim()}”.`
-          : `Vendors matching “${searchQuery.trim()}”.`
+          ? `Vendors in ${category} matching "${searchQuery.trim()}".`
+          : `Vendors matching "${searchQuery.trim()}".`
       : category && subcategory
         ? `Vendors in ${subcategory} (${category}).`
         : category
@@ -59,10 +59,10 @@ export default async function CompaniesPage({ searchParams }: PageProps) {
           <Suspense
             fallback={
               <div className="animate-pulse space-y-2">
-                <div className="h-4 w-24 rounded bg-[#ACAEA1]/30" />
-                <div className="h-8 w-full rounded bg-[#ACAEA1]/20" />
-                <div className="h-8 w-full rounded bg-[#ACAEA1]/20" />
-                <div className="h-8 w-full rounded bg-[#ACAEA1]/20" />
+                <div className="h-4 w-24 rounded bg-[#B8BFC1]/40" />
+                <div className="h-8 w-full rounded bg-[#B8BFC1]/30" />
+                <div className="h-8 w-full rounded bg-[#B8BFC1]/30" />
+                <div className="h-8 w-full rounded bg-[#B8BFC1]/30" />
               </div>
             }
           >
@@ -71,10 +71,10 @@ export default async function CompaniesPage({ searchParams }: PageProps) {
         </FilterSidebar>
 
         <div className="min-w-0 flex-1">
-          <h1 className="text-3xl font-bold text-[#233620]">{heading}</h1>
-          <p className="mt-2 text-[#546B4C]">{description}</p>
+          <h1 className="text-3xl font-bold text-[#2C4C5C]">{heading}</h1>
+          <p className="mt-2 text-[#6C8494]">{description}</p>
           <div className="mt-6">
-            <Suspense fallback={<div className="h-10 rounded-lg bg-[#ACAEA1]/20" />}>
+            <Suspense fallback={<div className="h-10 rounded-lg bg-[#B8BFC1]/30" />}>
               <VendorSearch className="max-w-md" />
             </Suspense>
           </div>

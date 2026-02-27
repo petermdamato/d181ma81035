@@ -8,7 +8,7 @@ type ReviewListProps = {
 export function ReviewList({ reviews }: ReviewListProps) {
   if (reviews.length === 0) {
     return (
-      <div className="rounded-xl border border-[#546B4C]/30 bg-[var(--card)] p-12 text-center text-[#546B4C]">
+      <div className="rounded-xl border border-[#6C8494]/25 bg-[var(--card)] p-12 text-center text-[#6C8494]">
         <p className="font-medium">No reviews yet</p>
         <p className="mt-1 text-sm">Be the first to share your experience with a data vendor.</p>
       </div>

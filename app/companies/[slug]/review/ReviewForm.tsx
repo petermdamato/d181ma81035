@@ -81,17 +81,19 @@ export function ReviewForm({ companyId, companySlug, companyName }: ReviewFormPr
     router.refresh();
   }
 
+  const selectClass = "mt-1 w-full rounded-lg border border-[#6C8494]/40 bg-white px-3 py-2 text-[#2C4C5C] focus:outline-none focus:ring-2 focus:ring-[#6C8494]";
+
   return (
     <Card>
       <CardContent className="p-6">
         <form onSubmit={handleSubmit} className="space-y-6">
           {error && (
-            <p className="text-sm text-[#B4442C]">{error}</p>
+            <p className="text-sm text-[#E05A48]">{error}</p>
           )}
 
           {RATING_LABELS.map(({ key, label, tooltipKey }) => (
             <div key={key}>
-              <label className="block text-sm font-medium text-[#233620]">
+              <label className="block text-sm font-medium text-[#2C4C5C]">
                 <RatingLabelWithTooltip label={label} tooltipKey={tooltipKey} />
               </label>
               <div className="mt-2 text-2xl">
@@ -105,45 +107,41 @@ export function ReviewForm({ companyId, companySlug, companyName }: ReviewFormPr
           ))}
 
           <div>
-            <label htmlFor="found-when" className="block text-sm font-medium text-[#233620]">
+            <label htmlFor="found-when" className="block text-sm font-medium text-[#2C4C5C]">
               I found this {companyName} when I was…
             </label>
             <select
               id="found-when"
               value={foundWhen}
               onChange={(e) => setFoundWhen(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-[#546B4C]/50 bg-white px-3 py-2 text-[#071205] focus:outline-none focus:ring-2 focus:ring-[#456926]"
+              className={selectClass}
             >
               <option value="">Select…</option>
               {FOUND_WHEN_OPTIONS.map((opt) => (
-                <option key={opt.value} value={opt.value}>
-                  {opt.label}
-                </option>
+                <option key={opt.value} value={opt.value}>{opt.label}</option>
               ))}
             </select>
           </div>
 
           <div>
-            <label htmlFor="result" className="block text-sm font-medium text-[#233620]">
+            <label htmlFor="result" className="block text-sm font-medium text-[#2C4C5C]">
               Result
             </label>
             <select
               id="result"
               value={result}
               onChange={(e) => setResult(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-[#546B4C]/50 bg-white px-3 py-2 text-[#071205] focus:outline-none focus:ring-2 focus:ring-[#456926]"
+              className={selectClass}
             >
               <option value="">Select…</option>
               {RESULT_OPTIONS.map((opt) => (
-                <option key={opt.value} value={opt.value}>
-                  {opt.label}
-                </option>
+                <option key={opt.value} value={opt.value}>{opt.label}</option>
               ))}
             </select>
           </div>
 
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-[#233620]">
+            <label htmlFor="title" className="block text-sm font-medium text-[#2C4C5C]">
               Review title
             </label>
             <Input
@@ -156,7 +154,7 @@ export function ReviewForm({ companyId, companySlug, companyName }: ReviewFormPr
             />
           </div>
           <div>
-            <label htmlFor="body" className="block text-sm font-medium text-[#233620]">
+            <label htmlFor="body" className="block text-sm font-medium text-[#2C4C5C]">
               Your review (optional)
             </label>
             <textarea
@@ -165,7 +163,7 @@ export function ReviewForm({ companyId, companySlug, companyName }: ReviewFormPr
               onChange={(e) => setBody(e.target.value)}
               placeholder="Share details that would help others..."
               rows={4}
-              className="mt-1 w-full rounded-lg border border-[#546B4C]/50 bg-white px-3 py-2 text-[#071205] placeholder:text-[#ACAEA1] focus:outline-none focus:ring-2 focus:ring-[#456926]"
+              className="mt-1 w-full rounded-lg border border-[#6C8494]/40 bg-white px-3 py-2 text-[#2C4C5C] placeholder:text-[#B8BFC1] focus:outline-none focus:ring-2 focus:ring-[#6C8494]"
             />
           </div>
           <div className="flex gap-2">
@@ -173,15 +171,13 @@ export function ReviewForm({ companyId, companySlug, companyName }: ReviewFormPr
               {loading ? "Submitting…" : "Submit review"}
             </Button>
             <Link href={`/companies/${companySlug}`}>
-              <Button type="button" variant="ghost">
-                Cancel
-              </Button>
+              <Button type="button" variant="ghost">Cancel</Button>
             </Link>
           </div>
         </form>
-        <p className="mt-4 text-sm text-[#546B4C]">
+        <p className="mt-4 text-sm text-[#6C8494]">
           Not signed in?{" "}
-          <Link href="/login" className="text-[#456926] hover:underline">
+          <Link href="/login" className="text-[#6C8494] font-medium hover:text-[#2C4C5C] hover:underline transition-colors">
             Sign in to submit
           </Link>
         </p>

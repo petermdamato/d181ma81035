@@ -6,10 +6,9 @@ export function Stars({
   size?: "sm" | "md";
 }) {
   const r = Math.round(Math.max(0, Math.min(5, rating)));
-  const className = size === "sm" ? "text-base" : "text-[#B4442C]";
   return (
     <span
-      className={`inline-flex gap-0.5 ${className}`}
+      className={`inline-flex gap-0.5 text-[#F3E308] ${size === "sm" ? "text-base" : "text-lg"}`}
       aria-label={`${r} out of 5 stars`}
     >
       {[1, 2, 3, 4, 5].map((i) => (

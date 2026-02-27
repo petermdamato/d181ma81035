@@ -52,13 +52,13 @@ export default async function CompanyEditPage({ params }: Props) {
       <div className="mb-6">
         <Link
           href={`/companies/${slug}`}
-          className="text-sm text-[#546B4C] hover:text-[#456926]"
+          className="text-sm text-[#6C8494] hover:text-[#2C4C5C] transition-colors"
         >
           ← Back to {company.name}
         </Link>
       </div>
-      <h1 className="text-2xl font-bold text-[#233620]">Edit company profile</h1>
-      <p className="mt-1 text-[#546B4C]">{company.name}</p>
+      <h1 className="text-2xl font-bold text-[#2C4C5C]">Edit company profile</h1>
+      <p className="mt-1 text-[#6C8494]">{company.name}</p>
       <div className="mt-8">
         <CompanyProfileForm
           companyId={company.id}

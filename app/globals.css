@@ -2,19 +2,17 @@
 
 :root {
   /* Primary palette */
-  --color-primary: #456926;
-  --color-primary-dark: #233620;
-  --color-primary-muted: #546B4C;
-  --color-bg-dark: #071205;
-  --color-surface: #ACAEA1;
-  /* Accent */
-  --color-accent: #B4442C;
-  --color-accent-dark: #6D1C07;
+  --color-primary: #2C4C5C;
+  --color-primary-dark: #1e3642;
+  --color-primary-mid: #6C8494;
+  --color-surface: #B8BFC1;
+  --color-accent-yellow: #F3E308;
+  --color-error: #E05A48;
   /* Semantic */
-  --background: #f8f9f7;
-  --foreground: #071205;
+  --background: #f4f7f9;
+  --foreground: #2C4C5C;
   --card: #ffffff;
-  --border: #546B4C;
+  --border: #6C8494;
 }
 
 @theme inline {
@@ -22,11 +20,10 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--color-primary);
   --color-primary-dark: var(--color-primary-dark);
-  --color-primary-muted: var(--color-primary-muted);
-  --color-bg-dark: var(--color-bg-dark);
+  --color-primary-mid: var(--color-primary-mid);
   --color-surface: var(--color-surface);
-  --color-accent: var(--color-accent);
-  --color-accent-dark: var(--color-accent-dark);
+  --color-accent-yellow: var(--color-accent-yellow);
+  --color-error: var(--color-error);
   --color-card: var(--card);
   --color-border: var(--border);
   --font-sans: var(--font-geist-sans);

@@ -19,40 +19,35 @@ export function NewVendorsRibbon({ companies }: NewVendorsRibbonProps) {
     const el = scrollRef.current;
     if (!el) return;
     setCanScrollLeft(el.scrollLeft > 0);
-    setCanScrollRight(
-      el.scrollLeft < el.scrollWidth - el.clientWidth - 1
-    );
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 1);
   }
 
   function scroll(direction: "left" | "right") {
     const el = scrollRef.current;
     if (!el) return;
-    el.scrollBy({
-      left: direction === "left" ? -280 : 280,
-      behavior: "smooth",
-    });
+    el.scrollBy({ left: direction === "left" ? -280 : 280, behavior: "smooth" });
   }
 
   if (companies.length === 0) {
     return (
-      <section className="rounded-xl border border-[#546B4C]/30 bg-[#ACAEA1]/10 px-6 py-8">
-        <h2 className="text-lg font-semibold text-[#233620] mb-4">New vendors</h2>
-        <p className="text-sm text-[#546B4C]">No vendors yet. Check back soon.</p>
+      <section className="rounded-xl border border-[#6C8494]/25 bg-[#B8BFC1]/15 px-6 py-8">
+        <h2 className="mb-4 text-lg font-semibold text-[#2C4C5C]">New vendors</h2>
+        <p className="text-sm text-[#6C8494]">No vendors yet. Check back soon.</p>
       </section>
     );
   }
 
   return (
-    <section className="rounded-xl border border-[#546B4C]/30 bg-[#ACAEA1]/10 overflow-hidden" aria-label="New vendors">
-      <div className="flex items-center justify-between gap-4 px-4 pt-4 pb-2">
-        <h2 className="text-lg font-semibold text-[#233620]">New vendors</h2>
+    <section className="overflow-hidden rounded-xl border border-[#6C8494]/25 bg-[#B8BFC1]/15" aria-label="New vendors">
+      <div className="flex items-center justify-between gap-4 px-4 pb-2 pt-4">
+        <h2 className="text-lg font-semibold text-[#2C4C5C]">New vendors</h2>
         <div className="flex gap-1">
           <button
             type="button"
             onClick={() => scroll("left")}
             disabled={!canScrollLeft}
             aria-label="Previous vendors"
-            className="h-11 w-11 rounded-md border border-[#546B4C]/40 bg-white text-[#233620] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#ACAEA1]/30 transition-colors flex items-center justify-center"
+            className="flex h-11 w-11 items-center justify-center rounded-md border border-[#6C8494]/25 bg-white text-[#6C8494] transition-colors hover:bg-[#B8BFC1]/40 hover:text-[#2C4C5C] disabled:cursor-not-allowed disabled:opacity-40"
           >
             ←
           </button>
@@ -61,7 +56,7 @@ export function NewVendorsRibbon({ companies }: NewVendorsRibbonProps) {
             onClick={() => scroll("right")}
             disabled={!canScrollRight}
             aria-label="Next vendors"
-            className="h-11 w-11 rounded-md border border-[#546B4C]/40 bg-white text-[#233620] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#ACAEA1]/30 transition-colors flex items-center justify-center"
+            className="flex h-11 w-11 items-center justify-center rounded-md border border-[#6C8494]/25 bg-white text-[#6C8494] transition-colors hover:bg-[#B8BFC1]/40 hover:text-[#2C4C5C] disabled:cursor-not-allowed disabled:opacity-40"
           >
             →
           </button>
@@ -74,31 +69,22 @@ export function NewVendorsRibbon({ companies }: NewVendorsRibbonProps) {
         style={{ scrollbarWidth: "thin" }}
       >
         {companies.map((company) => (
-          <Link
-            key={company.id}
-            href={`/companies/${company.slug}`}
-            className="w-64 shrink-0 snap-start"
-          >
-            <Card className="h-full transition-all hover:shadow-md hover:border-[#456926]/50">
-              <CardContent className="p-3 flex items-center gap-3">
+          <Link key={company.id} href={`/companies/${company.slug}`} className="w-64 shrink-0 snap-start">
+            <Card className="h-full transition-all hover:shadow-md hover:border-[#6C8494]/50">
+              <CardContent className="flex items-center gap-3 p-3">
                 {company.logo_url ? (
-                  <div className="relative h-12 w-12 shrink-0 rounded-lg overflow-hidden bg-white">
-                    <Image
-                      src={company.logo_url}
-                      alt=""
-                      fill
-                      className="object-contain"
-                    />
+                  <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-white">
+                    <Image src={company.logo_url} alt="" fill className="object-contain" />
                   </div>
                 ) : (
-                  <div className="h-12 w-12 shrink-0 rounded-lg bg-[#546B4C]/20 flex items-center justify-center text-[#456926] font-bold">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#2C4C5C]/10 font-bold text-[#2C4C5C]">
                     {company.name.charAt(0)}
                   </div>
                 )}
                 <div className="min-w-0 flex-1">
-                  <p className="font-medium text-[#233620] truncate">{company.name}</p>
+                  <p className="truncate font-medium text-[#2C4C5C]">{company.name}</p>
                   {(company.category || company.subcategory) && (
-                    <p className="text-xs text-[#546B4C] truncate">
+                    <p className="truncate text-xs text-[#6C8494]">
                       {[company.category, company.subcategory].filter(Boolean).join(" › ")}
                     </p>
                   )}

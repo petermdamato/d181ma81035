@@ -24,14 +24,14 @@ export default async function Home() {
 
   return (
     <div className="min-h-[80vh]">
-      <section className="relative overflow-hidden bg-[#071205] text-white">
-        <div className="absolute inset-0 bg-[#233620]/50" />
+      <section className="relative overflow-hidden bg-[#2C4C5C] text-white">
+        <div className="absolute inset-0 bg-[#1e3642]/40" />
         <div className="relative mx-auto max-w-6xl px-4 py-16 sm:py-24 lg:py-32">
           <h1 className="text-3xl font-bold tracking-tight sm:text-5xl md:text-6xl">
             The directory for{" "}
-            <span className="text-[#ACAEA1]">data vendor</span> reviews
+            <span className="text-[#B8BFC1]">data vendor</span> reviews
           </h1>
-          <p className="mt-5 max-w-2xl text-base text-[#ACAEA1] sm:text-lg">
+          <p className="mt-5 max-w-2xl text-base text-[#B8BFC1] sm:text-lg">
             Discover and compare data providers. Read real reviews from people
             who use them—and add your own.
           </p>
@@ -40,7 +40,7 @@ export default async function Home() {
               <Button
                 variant="outline"
                 size="lg"
-                className="w-full border-[#ACAEA1] text-[#ACAEA1] hover:bg-[#ACAEA1]/10 sm:w-auto"
+                className="w-full border-[#B8BFC1]/60 text-[#B8BFC1] hover:bg-[#B8BFC1]/15 hover:text-white sm:w-auto"
               >
                 See reviews
               </Button>
@@ -49,7 +49,7 @@ export default async function Home() {
               <Button
                 variant="accent"
                 size="lg"
-                className="w-full bg-[#B4442C] hover:bg-[#6D1C07] sm:w-auto"
+                className="w-full sm:w-auto"
               >
                 Browse vendors
               </Button>
@@ -58,7 +58,7 @@ export default async function Home() {
               <Button
                 variant="primary"
                 size="lg"
-                className="inline-flex w-full items-center justify-center gap-2 bg-[#456926] hover:bg-[#233620] sm:w-auto"
+                className="inline-flex w-full items-center justify-center gap-2 bg-[#F3E308] text-[#2C4C5C] hover:bg-[#d4c807] border-[#c9bd06] sm:w-auto"
               >
                 Search vendors with AI
                 <SparkleIcon className="h-5 w-5 shrink-0" />

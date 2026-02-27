@@ -35,7 +35,7 @@ export function ClaimCompanyForm({ companyId, companySlug, companyName, websiteU
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="claim-email" className="block text-sm font-medium text-[#233620]">
+        <label htmlFor="claim-email" className="block text-sm font-medium text-[#2C4C5C]">
           Work email
         </label>
         <Input
@@ -48,16 +48,12 @@ export function ClaimCompanyForm({ companyId, companySlug, companyName, websiteU
           className="mt-1"
           disabled={isPending}
         />
-        <p className="mt-1 text-xs text-[#546B4C]">
+        <p className="mt-1 text-xs text-[#6C8494]">
           Must be an address at your company&apos;s domain (from {websiteUrl})
         </p>
       </div>
       {message && (
-        <p
-          className={
-            message.type === "error" ? "text-sm text-[#B4442C]" : "text-sm text-[#456926]"
-          }
-        >
+        <p className={message.type === "error" ? "text-sm text-[#E05A48]" : "text-sm text-[#2C4C5C] font-medium"}>
           {message.text}
         </p>
       )}

@@ -18,7 +18,7 @@ function HighlightText({ text, term }: { text: string; term: string }) {
     <>
       {parts.map((part, i) =>
         part.toLowerCase() === term.trim().toLowerCase() ? (
-          <mark key={i} className="bg-[#B4442C]/30 rounded px-0.5">
+          <mark key={i} className="rounded bg-[#F3E308]/40 px-0.5 text-[#2C4C5C]">
             {part}
           </mark>
         ) : (
@@ -53,13 +53,13 @@ export function VendorReviewCard({ review, searchTerm }: VendorReviewCardProps) 
       <CardContent className="p-4">
         <div className="flex flex-wrap items-start justify-between gap-2">
           <div>
-            <p className="text-sm font-medium text-[#546B4C]">{displayName}</p>
-            <h3 className="font-semibold text-[#233620]">{review.title}</h3>
+            <p className="text-sm font-medium text-[#6C8494]">{displayName}</p>
+            <h3 className="font-semibold text-[#2C4C5C]">{review.title}</h3>
           </div>
           {company && (
             <Link
               href={`/companies/${company.slug}`}
-              className="text-sm text-[#456926] hover:underline shrink-0"
+              className="shrink-0 text-sm text-[#6C8494] hover:text-[#2C4C5C] hover:underline transition-colors"
             >
               ← {company.name}
             </Link>
@@ -71,13 +71,13 @@ export function VendorReviewCard({ review, searchTerm }: VendorReviewCardProps) 
             const r = val(key);
             return (
               <div key={key} className="flex items-center gap-2">
-                <span className="text-xs text-[#546B4C]">
+                <span className="text-xs text-[#6C8494]">
                   <RatingLabelWithTooltip label={`${label}:`} tooltipKey={tooltipKey} />
                 </span>
                 {r != null ? (
                   <Stars rating={r} size="sm" />
                 ) : (
-                  <span className="text-xs text-[#ACAEA1]">N/A</span>
+                  <span className="text-xs text-[#B8BFC1]">N/A</span>
                 )}
               </div>
             );
@@ -87,12 +87,12 @@ export function VendorReviewCard({ review, searchTerm }: VendorReviewCardProps) 
         {(review.found_when || review.result) && (
           <div className="mt-2 flex flex-wrap gap-2">
             {review.found_when && (
-              <span className="rounded-full bg-[#456926]/20 px-2 py-0.5 text-xs text-[#233620]">
+              <span className="rounded-full bg-[#2C4C5C]/10 px-2 py-0.5 text-xs text-[#2C4C5C]">
                 {getFoundWhenLabel(review.found_when)}
               </span>
             )}
             {review.result && (
-              <span className="rounded-full bg-[#B4442C]/20 px-2 py-0.5 text-xs text-[#6D1C07]">
+              <span className="rounded-full bg-[#6C8494]/15 px-2 py-0.5 text-xs text-[#2C4C5C]">
                 {getResultLabel(review.result)}
               </span>
             )}
@@ -100,7 +100,7 @@ export function VendorReviewCard({ review, searchTerm }: VendorReviewCardProps) 
         )}
 
         {review.body && (
-          <p className="mt-3 text-sm text-[#546B4C]">
+          <p className="mt-3 text-sm text-[#6C8494]">
             {searchTerm ? (
               <HighlightText text={review.body} term={searchTerm} />
             ) : (
